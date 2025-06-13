@@ -1,31 +1,20 @@
-# Stage 1: Build the Angular application
-FROM node:18-alpine AS build
+# Single stage build (development/testing only)
+FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files first to leverage Docker cache
 COPY package.json package-lock.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy all source files
 COPY . .
 
-# Build the Angular app in production mode
+# Build the app
 RUN npm run build -- --configuration=production
 
-# Stage 2: Serve the application using Nginx
-FROM nginx:alpine
+# Install Angular CLI globally to use its server
+RUN npm install -g @angular/cli
 
-# Copy the built app from the previous stage
-COPY --from=build /app/dist/simple-angular-docker /usr/share/nginx/html
+EXPOSE 4200
 
-# Copy custom nginx configuration if needed
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Expose port 80
-EXPOSE 80
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Serve the app using Angular CLI (not recommended for production)
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--disable-host-check"]
