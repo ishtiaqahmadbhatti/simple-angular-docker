@@ -4,4 +4,4 @@ services:
     image: ishtiaqahmad913/simple-angular-docker-image-prod
     container_name: simple-angular-docker
     ports:
-      - "4200:4200"
+      - "80:80"

@@ -14,7 +14,7 @@ RUN npm run build -- --configuration=production
 # Install Angular CLI globally to use its server
 RUN npm install -g @angular/cli
 
-EXPOSE 4200
+EXPOSE 80
 
 # Serve the app using Angular CLI (not recommended for production)
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--disable-host-check"]
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "80", "--disable-host-check"]
