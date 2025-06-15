@@ -1,64 +1,64 @@
 <div class="particles" id="particles"></div>
 
 <div class="game-container">
-  <div class="game-header">
-    <div class="logo">
-      <div class="logo-icon">🐍</div>
-      <h1>RAINBOW SNAKE</h1>
+    <div class="game-header">
+        <div class="logo">
+            <div class="logo-icon">🐍</div>
+            <h1>RAINBOW SNAKE</h1>
+        </div>
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-label">SCORE</div>
+                <div class="stat-value">{{ score }}</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">HIGH SCORE</div>
+                <div class="stat-value">{{ highScore }}</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">SPEED</div>
+                <div class="stat-value">{{ speed }}</div>
+            </div>
+        </div>
     </div>
-    <div class="stats">
-      <div class="stat-box">
-        <div class="stat-label">SCORE</div>
-        <div class="stat-value">{{ gameService.score }}</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">HIGH SCORE</div>
-        <div class="stat-value">{{ gameService.highScore }}</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">SPEED</div>
-        <div class="stat-value">{{ gameService.speed }}</div>
-      </div>
+    
+    <div class="game-board">
+        <canvas #gameCanvas width="600" height="450"></canvas>
+        <div class="game-over" *ngIf="gameOverVisible">
+            <h2>GAME OVER!</h2>
+            <p>Your score: <span>{{ score }}</span></p>
+            <button (click)="restartGame()">PLAY AGAIN</button>
+        </div>
     </div>
-  </div>
-  
-  <div id="game-board">
-    <canvas #gameCanvas id="game-canvas" width="600" height="450"></canvas>
-    <div class="game-over" *ngIf="gameService.gameOver">
-      <h2>GAME OVER!</h2>
-      <p>Your score: <span>{{ gameService.score }}</span></p>
-      <button (click)="gameService.restartGame()">PLAY AGAIN</button>
+    
+    <div class="controls">
+        <button (click)="startGame()">{{ gameRunning ? 'RESTART' : 'START GAME' }}</button>
+        <button (click)="pauseGame()">{{ paused ? 'RESUME' : 'PAUSE' }}</button>
+        <button (click)="changeSpeed(1)">SPEED UP</button>
+        <button (click)="changeSpeed(-1)">SLOW DOWN</button>
     </div>
-  </div>
-  
-  <div class="controls">
-    <button (click)="gameService.startGame()">{{ gameService.gameRunning ? 'RESTART' : 'START GAME' }}</button>
-    <button (click)="gameService.pauseGame()">{{ gameService.gameRunning ? 'PAUSE' : 'RESUME' }}</button>
-    <button (click)="gameService.changeSpeed(1)">SPEED UP</button>
-    <button (click)="gameService.changeSpeed(-1)">SLOW DOWN</button>
-  </div>
-  
-  <div class="instructions">
-    <h2>HOW TO PLAY</h2>
-    <div class="instructions-content">
-      <div class="instruction-group">
-        <h3>🎮 Controls</h3>
-        <ul>
-          <li><span class="key">↑</span> Move Up</li>
-          <li><span class="key">↓</span> Move Down</li>
-          <li><span class="key">←</span> Move Left</li>
-          <li><span class="key">→</span> Move Right</li>
-        </ul>
-      </div>
-      <div class="instruction-group">
-        <h3>🌟 Game Rules</h3>
-        <ul>
-          <li>Eat colorful food to grow</li>
-          <li>Don't hit the walls</li>
-          <li>Don't bite yourself</li>
-          <li>Longer snake = higher score</li>
-        </ul>
-      </div>
+    
+    <div class="instructions">
+        <h2>HOW TO PLAY</h2>
+        <div class="instructions-content">
+            <div class="instruction-group">
+                <h3>🎮 Controls</h3>
+                <ul>
+                    <li><span class="key">↑</span> Move Up</li>
+                    <li><span class="key">↓</span> Move Down</li>
+                    <li><span class="key">←</span> Move Left</li>
+                    <li><span class="key">→</span> Move Right</li>
+                </ul>
+            </div>
+            <div class="instruction-group">
+                <h3>🌟 Game Rules</h3>
+                <ul>
+                    <li>Eat colorful food to grow</li>
+                    <li>Don't hit the walls</li>
+                    <li>Don't bite yourself</li>
+                    <li>Longer snake = higher score</li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
