@@ -334,3 +334,65 @@ button:active {
         font-size: 1.3rem;
     }
 }
+
+/* Previous CSS remains the same, just add these mobile control styles at the end */
+
+.mobile-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    touch-action: manipulation;
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.control-btn {
+    width: 80px;
+    height: 80px;
+    margin: 0 15px;
+    font-size: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.control-btn:active {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0.95);
+}
+
+.up {
+    margin-bottom: 10px;
+}
+
+.down {
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    .mobile-controls {
+        display: none;
+    }
+}
+
+/* Add this to make buttons more responsive on small devices */
+@media (max-width: 480px) {
+    .control-btn {
+        width: 70px;
+        height: 70px;
+        margin: 0 10px;
+        font-size: 28px;
+    }
+}

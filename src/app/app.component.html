@@ -22,7 +22,9 @@
         </div>
     </div>
     
-    <div class="game-board">
+    <div class="game-board" 
+         (touchstart)="handleTouchStart($event)" 
+         (touchend)="handleTouchEnd($event)">
         <canvas #gameCanvas width="600" height="450"></canvas>
         <div class="game-over" *ngIf="gameOverVisible">
             <h2>GAME OVER!</h2>
@@ -37,6 +39,28 @@
         <button (click)="changeSpeed(1)">SPEED UP</button>
         <button (click)="changeSpeed(-1)">SLOW DOWN</button>
     </div>
+
+    <!-- Mobile Controls -->
+    <div class="mobile-controls" *ngIf="isMobile">
+        <div class="control-row">
+            <button class="control-btn up" 
+                    (touchstart)="changeDirection('up')" 
+                    (touchend)="preventDefault($event)">↑</button>
+        </div>
+        <div class="control-row">
+            <button class="control-btn left" 
+                    (touchstart)="changeDirection('left')" 
+                    (touchend)="preventDefault($event)">←</button>
+            <button class="control-btn right" 
+                    (touchstart)="changeDirection('right')" 
+                    (touchend)="preventDefault($event)">→</button>
+        </div>
+        <div class="control-row">
+            <button class="control-btn down" 
+                    (touchstart)="changeDirection('down')" 
+                    (touchend)="preventDefault($event)">↓</button>
+        </div>
+    </div>
     
     <div class="instructions">
         <h2>HOW TO PLAY</h2>
@@ -44,10 +68,8 @@
             <div class="instruction-group">
                 <h3>🎮 Controls</h3>
                 <ul>
-                    <li><span class="key">↑</span> Move Up</li>
-                    <li><span class="key">↓</span> Move Down</li>
-                    <li><span class="key">←</span> Move Left</li>
-                    <li><span class="key">→</span> Move Right</li>
+                    <li><span class="key">↑</span> <span class="key">↓</span> <span class="key">←</span> <span class="key">→</span> or Swipe to move</li>
+                    <li><span class="key">SPACE</span> Pause</li>
                 </ul>
             </div>
             <div class="instruction-group">
