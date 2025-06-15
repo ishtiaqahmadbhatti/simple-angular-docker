@@ -1,12 +1,27 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { GameService } from '../app/game.service.ts';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [CommonModule],
 })
-export class AppComponent {
-  title = 'simple-angular-docker';
+export class AppComponent implements OnInit, OnDestroy {
+  constructor(public gameService: GameService) {}
+
+  ngOnInit() {
+    this.gameService.initGame();
+    this.gameService.createParticles();
+  }
+
+  ngOnDestroy() {
+    this.gameService.clearGame();
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    this.gameService.handleKeyDown(event);
+  }
 }
