@@ -34,7 +34,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'This is Running the image.'
-                sh 'docker compose up -d'
+                sh 'docker compose down && docker compose up -d'
                 echo 'Container Running Successfully.'
             }
         }
