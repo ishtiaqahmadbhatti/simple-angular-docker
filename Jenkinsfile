@@ -10,28 +10,28 @@ pipeline {
                 }
             }
         }
-        stage('Code Clone') {
+        stage('Clone') {
             steps {
                 script{
                     clone('https://github.com/ishtiaqahmadbhatti/simple-angular-docker', 'main')
                 }
             }
         }
-        stage('Build Image') {
+        stage('Build') {
             steps {
                 script{
                     build("snakegame","latest","ishtiaqahmad913")
                 }
             }
         }
-        stage('Push Image') {
+        stage('Push') {
             steps {
                script{
                    push("snakegame","latest")
                }
             }
         }
-        stage('Run Container') {
+        stage('Deploy') {
             steps {
                 echo 'This is Running the image.'
                 sh 'docker compose up -d'
